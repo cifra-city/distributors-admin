@@ -1,0 +1,30 @@
+openapi: 3.1.0
+info:
+  title: Title
+  description: Title
+  version: 1.0.0
+
+
+paths:
+  /test:
+    post:
+      summary: Test
+      operationId: Test
+      responses:
+        '201':
+          description: Created
+
+components:
+  schemas:
+    Distributor:
+      $ref: './spec/components/schemas/Distributor.yaml'
+    DistributorUpdate:
+      $ref: './spec/components/schemas/DistributorUpdate.yaml'
+    DistributorCreate:
+      $ref: './spec/components/schemas/DistributorCreate.yaml'
+    Employee:
+      $ref: './spec/components/schemas/Employee.yaml'
+    EmployeeUpdate:
+      $ref: './spec/components/schemas/EmployeeUpdate.yaml'
+    EmployeeCollection:
+      $ref: './spec/components/schemas/EmployeeCollection.yaml'

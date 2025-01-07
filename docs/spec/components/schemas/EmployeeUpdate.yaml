@@ -1,0 +1,33 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    required:
+      - id
+      - type
+      - attributes
+    properties:
+      id:
+        type: string
+        description: "Resource ID"
+      type:
+        type: string
+        enum: [ distributor_employee_update ]
+      attributes:
+        type: object
+        properties:
+          email:
+            type: string
+            format: email
+            description: "User email"
+          password:
+            type: string
+            description: "New user password"
+          distributor_id:
+            type: string
+            description: "Distributor ID"
+          created_at:
+            type: string
+            format: date-time
+            description: "Creation date"

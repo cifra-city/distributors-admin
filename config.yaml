@@ -1,0 +1,43 @@
+database:
+  url: "postgresql://postgres:postgres@localhost:5555/postgres?sslmode=disable"
+
+server:
+  port: ":8002"
+  base_path: "/api/v1"
+
+jwt:
+  access_token:
+    secret_key: "f6tD7wVYNvXMm4MwqivfpB9Gf+HYz8a3"
+    token_lifetime: 900
+
+rabbit:
+  url: "amqp://localhost:5672/"
+  user: "cifra-app"
+  password: "Test@1234"
+  exchange: "sso.events"
+
+cloudinary:
+  cloud_name: "example"
+  api_key: "example"
+  api_secret: "example"
+
+logging:
+  level: "debug"
+  format: "text"
+
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0
+
+swagger:
+  enabled: true
+  url: "/swagger"
+  port: "8080"
+
+cors:
+  allowed_origins: ["*"]
+  allowed_methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+  allowed_headers: ["Authorization", "Content-Type"]
+
+

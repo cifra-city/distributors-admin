@@ -1,0 +1,24 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    required:
+      - id
+      - type
+      - attributes
+    properties:
+      id:
+        type: string
+        description: "Resource ID"
+      type:
+        type: string
+        enum: [ distributor ]
+      attributes:
+        type: object
+        required:
+          - name
+        properties:
+          name:
+            type: string
+            description: "Distributor name"

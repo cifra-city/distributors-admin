@@ -1,0 +1,9 @@
+version: "2"
+sql:
+  - schema: internal/data/sql/repositories/migration
+    queries: internal/data/sql/repositories/query
+    engine: postgresql
+    gen:
+      go:
+        package: sqlcore
+        out: internal/data/sql/repositories/sqlcore

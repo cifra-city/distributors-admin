@@ -1,0 +1,16 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    required:
+    - type
+    - attributes
+    properties:
+      type:
+        type: string
+        enum: [ distributor_employee_collection ]
+      attributes:
+        type: array
+        items:
+          $ref: './Employee.yaml'
