@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Resource ID | 
+**Id** | **string** | distributor ID | 
 **Type** | **string** |  | 
 **Attributes** | [**DistributorDataAttributes**](DistributorDataAttributes.md) |  | 
 

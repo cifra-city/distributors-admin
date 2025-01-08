@@ -21,7 +21,7 @@ var _ MappedNullable = &DistributorData{}
 
 // DistributorData struct for DistributorData
 type DistributorData struct {
-	// Resource ID
+	// distributor ID
 	Id string `json:"id"`
 	Type string `json:"type"`
 	Attributes DistributorDataAttributes `json:"attributes"`

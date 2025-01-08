@@ -8,8 +8,8 @@ import (
 )
 
 type Repo struct {
-	Distributors      repositories.Distributors
-	DistributorsStaff repositories.DistributorsStaff
+	Distributors          repositories.Distributors
+	DistributorsEmployees repositories.DistributorsEmployees
 }
 
 func NewDBConnection(url string) (*sql.DB, error) {
@@ -32,7 +32,7 @@ func NewRepoSQL(url string) (*Repo, error) {
 	}
 	queries := sqlcore.New(db)
 	return &Repo{
-		Distributors:      repositories.NewDistributors(queries),
-		DistributorsStaff: repositories.NewDistributorsStaff(queries),
+		Distributors:          repositories.NewDistributors(queries),
+		DistributorsEmployees: repositories.NewDistributorsStaff(queries),
 	}, nil
 }

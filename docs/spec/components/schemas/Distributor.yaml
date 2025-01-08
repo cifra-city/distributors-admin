@@ -10,7 +10,7 @@ properties:
     properties:
       id:
         type: string
-        description: "Resource ID"
+        description: "distributor ID"
       type:
         type: string
         enum: [ distributor ]

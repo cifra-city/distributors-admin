@@ -6,10 +6,16 @@ CREATE TABLE distributors (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE TABLE distributors_staff (
+CREATE TABLE distributors_employees (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     distributors_id UUID NOT NULL REFERENCES distributors(id) ON DELETE CASCADE,
     user_id UUID NOT NULL,
-    role TEXT NOT NULL,
+    role roles NOT NULL,
     created_at TIMESTAMP DEFAULT NOW()
 );
+
+CREATE TYPE roles AS ENUM ('owner', 'admin', 'moderator', 'staff', 'member');
+
+CREATE UNIQUE INDEX unique_owner_per_distributor
+    ON distributors_employees (distributors_id)
+    WHERE role = 'owner';

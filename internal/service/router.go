@@ -28,19 +28,19 @@ func Run(ctx context.Context) {
 				r.Use(authMW)
 				r.Post("/create", handlers.DistributorCreate)
 
-				r.Route("/distributors/{id}", func(r chi.Router) {
+				r.Route("/distributors/{distributor_id}", func(r chi.Router) {
 					r.Route("/update", func(r chi.Router) {
 						r.Put("/name", handlers.DistributorUpdate)
 					})
-					r.Route("/staff", func(r chi.Router) {
-						r.Post("/add", nil)
-						r.Put("/update", nil)
-						r.Delete("/delete", nil)
-						r.Post("/{user_id}", nil) // info about user in distributor
+					r.Route("/employees", func(r chi.Router) {
+						r.Post("/add", handlers.EmployeeAdd)
+						r.Put("/update", handlers.EmployeeUpdate)
+						r.Delete("/delete", handlers.EmployeeDelete)
 					})
 				})
 			})
 		})
+
 	})
 
 	server := httpkit.StartServer(ctx, service.Config.Server.Port, r, service.Logger)

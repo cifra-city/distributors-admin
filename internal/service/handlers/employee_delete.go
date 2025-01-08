@@ -7,7 +7,6 @@ import (
 	"github.com/cifra-city/comtools/httpkit"
 	"github.com/cifra-city/comtools/httpkit/problems"
 	"github.com/cifra-city/distributors-admin/internal/config"
-	"github.com/cifra-city/distributors-admin/internal/data/sql/repositories/sqlcore"
 	"github.com/cifra-city/distributors-admin/internal/service/requests"
 	"github.com/cifra-city/tokens"
 	"github.com/go-chi/chi/v5"
@@ -15,7 +14,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func DistributorUpdate(w http.ResponseWriter, r *http.Request) {
+func EmployeeDelete(w http.ResponseWriter, r *http.Request) {
 	Server, err := cifractx.GetValue[*config.Service](r.Context(), config.SERVER)
 	if err != nil {
 		logrus.Errorf("Failed to retrieve service configuration: %v", err)
@@ -25,13 +24,13 @@ func DistributorUpdate(w http.ResponseWriter, r *http.Request) {
 
 	log := Server.Logger
 
-	req, err := requests.NewDistributorUpdate(r)
+	req, err := requests.NewEmployeeDelete(r)
 	if err != nil {
 		httpkit.RenderErr(w, problems.BadRequest(err)...)
 		return
 	}
 
-	userId, ok := r.Context().Value(tokens.UserIDKey).(uuid.UUID)
+	InitiatorId, ok := r.Context().Value(tokens.UserIDKey).(uuid.UUID)
 	if !ok {
 		log.Warn("UserID not found in context")
 		httpkit.RenderErr(w, problems.Unauthorized("User not authenticated"))
@@ -45,25 +44,19 @@ func DistributorUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	employee, err := Server.SqlDB.DistributorsEmployees.GetByUser(r.Context(), distributorId, userId)
+	userForDeleteId, err := uuid.Parse(req.Data.Attributes.UserId)
 	if err != nil {
-		log.Errorf("Failed to get distributor staff: %v", err)
-		httpkit.RenderErr(w, problems.InternalError("Failed to get distributor staff"))
+		httpkit.RenderErr(w, problems.BadRequest(err)...)
 		return
 	}
 
-	if employee.Role != sqlcore.RolesAdmin && employee.Role != sqlcore.RolesOwner {
-		log.Errorf("User is not allowed to update distributor")
-		httpkit.RenderErr(w, problems.Forbidden("User is not allowed to update distributor"))
-		return
-	}
-
-	distributor, err := Server.SqlDB.Distributors.UpdateName(r.Context(), distributorId, req.Data.Attributes.Name)
+	err = Server.SqlDB.DistributorsEmployees.DeleteByUser(r.Context(), distributorId, InitiatorId, userForDeleteId)
 	if err != nil {
-		log.Errorf("Failed to update distributor: %v", err)
-		httpkit.RenderErr(w, problems.InternalError("Failed to update distributor"))
+		log.Errorf("Failed to delete employee: %v", err)
+		httpkit.RenderErr(w, problems.InternalError("Failed to delete employee"))
 		return
 	}
 
-	httpkit.Render(w, NewDistributorResponse(distributor))
+	log.Infof("Employee %s deleted", userForDeleteId)
+	httpkit.Render(w, http.StatusOK)
 }

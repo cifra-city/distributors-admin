@@ -12,7 +12,7 @@ type Distributors interface {
 
 	Get(ctx context.Context, id uuid.UUID) (sqlcore.Distributor, error)
 
-	UpdateName(ctx context.Context, id string, name string) (sqlcore.Distributor, error)
+	UpdateName(ctx context.Context, id uuid.UUID, name string) (sqlcore.Distributor, error)
 
 	List(ctx context.Context) ([]sqlcore.Distributor, error)
 }
@@ -37,13 +37,9 @@ func (d *distributors) Get(ctx context.Context, id uuid.UUID) (sqlcore.Distribut
 	return d.queries.GetDistributorByID(ctx, id)
 }
 
-func (d *distributors) UpdateName(ctx context.Context, id string, name string) (sqlcore.Distributor, error) {
-	distributorId, err := uuid.Parse(id)
-	if err != nil {
-		return sqlcore.Distributor{}, err
-	}
+func (d *distributors) UpdateName(ctx context.Context, id uuid.UUID, name string) (sqlcore.Distributor, error) {
 	return d.queries.UpdateDistributorName(ctx, sqlcore.UpdateDistributorNameParams{
-		ID:   distributorId,
+		ID:   id,
 		Name: name,
 	})
 }

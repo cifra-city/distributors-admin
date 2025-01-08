@@ -39,10 +39,22 @@ components:
           $ref: '#/components/schemas/Employee_data'
       required:
       - data
+    EmployeeCreate:
+      properties:
+        data:
+          $ref: '#/components/schemas/EmployeeCreate_data'
+      required:
+      - data
     EmployeeUpdate:
       properties:
         data:
           $ref: '#/components/schemas/EmployeeUpdate_data'
+      required:
+      - data
+    EmployeeDelete:
+      properties:
+        data:
+          $ref: '#/components/schemas/EmployeeDelete_data'
       required:
       - data
     EmployeeCollection:
@@ -65,7 +77,7 @@ components:
     Distributor_data:
       properties:
         id:
-          description: Resource ID
+          description: distributor ID
           type: string
         type:
           enum:
@@ -86,24 +98,17 @@ components:
       - name
     DistributorUpdate_data:
       properties:
-        id:
-          description: Resource ID
-          type: string
         type:
           enum:
-          - distributor
+          - distributor_update
           type: string
         attributes:
           $ref: '#/components/schemas/DistributorUpdate_data_attributes'
       required:
       - attributes
-      - id
       - type
     DistributorCreate_data:
       properties:
-        id:
-          description: Resource ID
-          type: string
         type:
           enum:
           - distributor_create
@@ -115,12 +120,11 @@ components:
       - type
     Employee_data_attributes:
       properties:
-        email:
-          description: User email
-          format: email
+        user_id:
+          description: User ID
           type: string
-        password:
-          description: New user password
+        role:
+          description: User role
           type: string
         distributor_id:
           description: Distributor ID
@@ -132,10 +136,12 @@ components:
       required:
       - created_at
       - distributor_id
+      - role
+      - user_id
     Employee_data:
       properties:
         id:
-          description: Resource ID
+          description: employee ID
           type: string
         type:
           enum:
@@ -147,22 +153,40 @@ components:
       - attributes
       - id
       - type
-    EmployeeUpdate_data_attributes:
+    EmployeeCreate_data_attributes:
       properties:
-        email:
-          description: User email
-          format: email
+        user_id:
+          description: User ID
           type: string
-        password:
-          description: New user password
-          type: string
-        distributor_id:
-          description: Distributor ID
+        role:
+          description: User role
           type: string
         created_at:
           description: Creation date
           format: date-time
           type: string
+      required:
+      - created_at
+      - role
+      - user_id
+    EmployeeCreate_data:
+      properties:
+        type:
+          enum:
+          - distributor_employee_create
+          type: string
+        attributes:
+          $ref: '#/components/schemas/EmployeeCreate_data_attributes'
+      required:
+      - attributes
+      - type
+    EmployeeUpdate_data_attributes:
+      properties:
+        role:
+          description: User role
+          type: string
+      required:
+      - role
     EmployeeUpdate_data:
       properties:
         id:
@@ -177,6 +201,24 @@ components:
       required:
       - attributes
       - id
+      - type
+    EmployeeDelete_data_attributes:
+      properties:
+        user_id:
+          description: User ID
+          type: string
+      required:
+      - user_id
+    EmployeeDelete_data:
+      properties:
+        type:
+          enum:
+          - distributor_employee_delete
+          type: string
+        attributes:
+          $ref: '#/components/schemas/EmployeeDelete_data_attributes'
+      required:
+      - attributes
       - type
     EmployeeCollection_data_attributes_inner:
       properties:

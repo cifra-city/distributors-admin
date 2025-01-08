@@ -21,8 +21,6 @@ var _ MappedNullable = &DistributorCreateData{}
 
 // DistributorCreateData struct for DistributorCreateData
 type DistributorCreateData struct {
-	// Resource ID
-	Id *string `json:"id,omitempty"`
 	Type string `json:"type"`
 	Attributes DistributorUpdateDataAttributes `json:"attributes"`
 }
@@ -46,38 +44,6 @@ func NewDistributorCreateData(type_ string, attributes DistributorUpdateDataAttr
 func NewDistributorCreateDataWithDefaults() *DistributorCreateData {
 	this := DistributorCreateData{}
 	return &this
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *DistributorCreateData) GetId() string {
-	if o == nil || IsNil(o.Id) {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DistributorCreateData) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *DistributorCreateData) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *DistributorCreateData) SetId(v string) {
-	o.Id = &v
 }
 
 // GetType returns the Type field value
@@ -138,9 +104,6 @@ func (o DistributorCreateData) MarshalJSON() ([]byte, error) {
 
 func (o DistributorCreateData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
 	toSerialize["type"] = o.Type
 	toSerialize["attributes"] = o.Attributes
 	return toSerialize, nil

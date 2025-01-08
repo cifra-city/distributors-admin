@@ -4,22 +4,17 @@ required:
 properties:
   data:
     required:
-      - id
       - type
       - attributes
     properties:
-      id:
-        type: string
-        description: "employee ID"
       type:
         type: string
-        enum: [ distributor_employee ]
+        enum: [ distributor_employee_create ]
       attributes:
         type: object
         required:
           - user_id
           - role
-          - distributor_id
           - created_at
         properties:
           user_id:
@@ -28,9 +23,6 @@ properties:
           role:
             type: string
             description: "User role"
-          distributor_id:
-            type: string
-            description: "Distributor ID"
           created_at:
             type: string
             format: date-time

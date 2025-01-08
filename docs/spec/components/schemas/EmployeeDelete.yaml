@@ -9,12 +9,12 @@ properties:
     properties:
       type:
         type: string
-        enum: [ distributor_create ]
+        enum: [ distributor_employee_delete ]
       attributes:
         type: object
         required:
-          - name
+          - user_id
         properties:
-          name:
+          user_id:
             type: string
-            description: "Distributor name"
+            description: "User ID"

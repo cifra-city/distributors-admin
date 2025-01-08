@@ -16,65 +16,38 @@ import (
 	"fmt"
 )
 
-// checks if the EmployeeData type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &EmployeeData{}
+// checks if the EmployeeDeleteData type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EmployeeDeleteData{}
 
-// EmployeeData struct for EmployeeData
-type EmployeeData struct {
-	// employee ID
-	Id string `json:"id"`
+// EmployeeDeleteData struct for EmployeeDeleteData
+type EmployeeDeleteData struct {
 	Type string `json:"type"`
-	Attributes EmployeeDataAttributes `json:"attributes"`
+	Attributes EmployeeDeleteDataAttributes `json:"attributes"`
 }
 
-type _EmployeeData EmployeeData
+type _EmployeeDeleteData EmployeeDeleteData
 
-// NewEmployeeData instantiates a new EmployeeData object
+// NewEmployeeDeleteData instantiates a new EmployeeDeleteData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEmployeeData(id string, type_ string, attributes EmployeeDataAttributes) *EmployeeData {
-	this := EmployeeData{}
-	this.Id = id
+func NewEmployeeDeleteData(type_ string, attributes EmployeeDeleteDataAttributes) *EmployeeDeleteData {
+	this := EmployeeDeleteData{}
 	this.Type = type_
 	this.Attributes = attributes
 	return &this
 }
 
-// NewEmployeeDataWithDefaults instantiates a new EmployeeData object
+// NewEmployeeDeleteDataWithDefaults instantiates a new EmployeeDeleteData object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewEmployeeDataWithDefaults() *EmployeeData {
-	this := EmployeeData{}
+func NewEmployeeDeleteDataWithDefaults() *EmployeeDeleteData {
+	this := EmployeeDeleteData{}
 	return &this
 }
 
-// GetId returns the Id field value
-func (o *EmployeeData) GetId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *EmployeeData) GetIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *EmployeeData) SetId(v string) {
-	o.Id = v
-}
-
 // GetType returns the Type field value
-func (o *EmployeeData) GetType() string {
+func (o *EmployeeDeleteData) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -85,7 +58,7 @@ func (o *EmployeeData) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *EmployeeData) GetTypeOk() (*string, bool) {
+func (o *EmployeeDeleteData) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,14 +66,14 @@ func (o *EmployeeData) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *EmployeeData) SetType(v string) {
+func (o *EmployeeDeleteData) SetType(v string) {
 	o.Type = v
 }
 
 // GetAttributes returns the Attributes field value
-func (o *EmployeeData) GetAttributes() EmployeeDataAttributes {
+func (o *EmployeeDeleteData) GetAttributes() EmployeeDeleteDataAttributes {
 	if o == nil {
-		var ret EmployeeDataAttributes
+		var ret EmployeeDeleteDataAttributes
 		return ret
 	}
 
@@ -109,7 +82,7 @@ func (o *EmployeeData) GetAttributes() EmployeeDataAttributes {
 
 // GetAttributesOk returns a tuple with the Attributes field value
 // and a boolean to check if the value has been set.
-func (o *EmployeeData) GetAttributesOk() (*EmployeeDataAttributes, bool) {
+func (o *EmployeeDeleteData) GetAttributesOk() (*EmployeeDeleteDataAttributes, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -117,11 +90,11 @@ func (o *EmployeeData) GetAttributesOk() (*EmployeeDataAttributes, bool) {
 }
 
 // SetAttributes sets field value
-func (o *EmployeeData) SetAttributes(v EmployeeDataAttributes) {
+func (o *EmployeeDeleteData) SetAttributes(v EmployeeDeleteDataAttributes) {
 	o.Attributes = v
 }
 
-func (o EmployeeData) MarshalJSON() ([]byte, error) {
+func (o EmployeeDeleteData) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -129,20 +102,18 @@ func (o EmployeeData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o EmployeeData) ToMap() (map[string]interface{}, error) {
+func (o EmployeeDeleteData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
 	toSerialize["attributes"] = o.Attributes
 	return toSerialize, nil
 }
 
-func (o *EmployeeData) UnmarshalJSON(data []byte) (err error) {
+func (o *EmployeeDeleteData) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
 		"type",
 		"attributes",
 	}
@@ -161,53 +132,53 @@ func (o *EmployeeData) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varEmployeeData := _EmployeeData{}
+	varEmployeeDeleteData := _EmployeeDeleteData{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEmployeeData)
+	err = decoder.Decode(&varEmployeeDeleteData)
 
 	if err != nil {
 		return err
 	}
 
-	*o = EmployeeData(varEmployeeData)
+	*o = EmployeeDeleteData(varEmployeeDeleteData)
 
 	return err
 }
 
-type NullableEmployeeData struct {
-	value *EmployeeData
+type NullableEmployeeDeleteData struct {
+	value *EmployeeDeleteData
 	isSet bool
 }
 
-func (v NullableEmployeeData) Get() *EmployeeData {
+func (v NullableEmployeeDeleteData) Get() *EmployeeDeleteData {
 	return v.value
 }
 
-func (v *NullableEmployeeData) Set(val *EmployeeData) {
+func (v *NullableEmployeeDeleteData) Set(val *EmployeeDeleteData) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableEmployeeData) IsSet() bool {
+func (v NullableEmployeeDeleteData) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableEmployeeData) Unset() {
+func (v *NullableEmployeeDeleteData) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableEmployeeData(val *EmployeeData) *NullableEmployeeData {
-	return &NullableEmployeeData{value: val, isSet: true}
+func NewNullableEmployeeDeleteData(val *EmployeeDeleteData) *NullableEmployeeDeleteData {
+	return &NullableEmployeeDeleteData{value: val, isSet: true}
 }
 
-func (v NullableEmployeeData) MarshalJSON() ([]byte, error) {
+func (v NullableEmployeeDeleteData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableEmployeeData) UnmarshalJSON(src []byte) error {
+func (v *NullableEmployeeDeleteData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

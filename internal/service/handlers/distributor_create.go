@@ -7,7 +7,6 @@ import (
 	"github.com/cifra-city/comtools/httpkit"
 	"github.com/cifra-city/comtools/httpkit/problems"
 	"github.com/cifra-city/distributors-admin/internal/config"
-	"github.com/cifra-city/distributors-admin/internal/data/sql/repositories"
 	"github.com/cifra-city/distributors-admin/internal/data/sql/repositories/sqlcore"
 	"github.com/cifra-city/distributors-admin/internal/service/requests"
 	"github.com/cifra-city/distributors-admin/resources"
@@ -46,7 +45,7 @@ func DistributorCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err = Server.SqlDB.DistributorsStaff.Create(r.Context(), distributor.ID, userID, repositories.RoleOwner)
+	_, err = Server.SqlDB.DistributorsEmployees.Create(r.Context(), distributor.ID, userID, string(sqlcore.RolesOwner))
 	if err != nil {
 		log.Errorf("Failed to create distributor staff: %v", err)
 		httpkit.RenderErr(w, problems.InternalError("Failed to create distributor staff"))

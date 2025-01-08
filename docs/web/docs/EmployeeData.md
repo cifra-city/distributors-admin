@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Resource ID | 
+**Id** | **string** | employee ID | 
 **Type** | **string** |  | 
 **Attributes** | [**EmployeeDataAttributes**](EmployeeDataAttributes.md) |  | 
 

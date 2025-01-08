@@ -4,16 +4,12 @@ required:
 properties:
   data:
     required:
-      - id
       - type
       - attributes
     properties:
-      id:
-        type: string
-        description: "Resource ID"
       type:
         type: string
-        enum: [ distributor ]
+        enum: [ distributor_update ]
       attributes:
         type: object
         required:

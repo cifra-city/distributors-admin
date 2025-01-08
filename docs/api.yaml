@@ -24,7 +24,11 @@ components:
       $ref: './spec/components/schemas/DistributorCreate.yaml'
     Employee:
       $ref: './spec/components/schemas/Employee.yaml'
+    EmployeeCreate:
+      $ref: './spec/components/schemas/EmployeeCreate.yaml'
     EmployeeUpdate:
       $ref: './spec/components/schemas/EmployeeUpdate.yaml'
+    EmployeeDelete:
+      $ref: './spec/components/schemas/EmployeeDelete.yaml'
     EmployeeCollection:
       $ref: './spec/components/schemas/EmployeeCollection.yaml'

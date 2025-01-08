@@ -1,67 +1,67 @@
-# DistributorUpdateData
+# EmployeeCreateData
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** |  | 
-**Attributes** | [**DistributorUpdateDataAttributes**](DistributorUpdateDataAttributes.md) |  | 
+**Attributes** | [**EmployeeCreateDataAttributes**](EmployeeCreateDataAttributes.md) |  | 
 
 ## Methods
 
-### NewDistributorUpdateData
+### NewEmployeeCreateData
 
-`func NewDistributorUpdateData(type_ string, attributes DistributorUpdateDataAttributes, ) *DistributorUpdateData`
+`func NewEmployeeCreateData(type_ string, attributes EmployeeCreateDataAttributes, ) *EmployeeCreateData`
 
-NewDistributorUpdateData instantiates a new DistributorUpdateData object
+NewEmployeeCreateData instantiates a new EmployeeCreateData object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewDistributorUpdateDataWithDefaults
+### NewEmployeeCreateDataWithDefaults
 
-`func NewDistributorUpdateDataWithDefaults() *DistributorUpdateData`
+`func NewEmployeeCreateDataWithDefaults() *EmployeeCreateData`
 
-NewDistributorUpdateDataWithDefaults instantiates a new DistributorUpdateData object
+NewEmployeeCreateDataWithDefaults instantiates a new EmployeeCreateData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetType
 
-`func (o *DistributorUpdateData) GetType() string`
+`func (o *EmployeeCreateData) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *DistributorUpdateData) GetTypeOk() (*string, bool)`
+`func (o *EmployeeCreateData) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *DistributorUpdateData) SetType(v string)`
+`func (o *EmployeeCreateData) SetType(v string)`
 
 SetType sets Type field to given value.
 
 
 ### GetAttributes
 
-`func (o *DistributorUpdateData) GetAttributes() DistributorUpdateDataAttributes`
+`func (o *EmployeeCreateData) GetAttributes() EmployeeCreateDataAttributes`
 
 GetAttributes returns the Attributes field if non-nil, zero value otherwise.
 
 ### GetAttributesOk
 
-`func (o *DistributorUpdateData) GetAttributesOk() (*DistributorUpdateDataAttributes, bool)`
+`func (o *EmployeeCreateData) GetAttributesOk() (*EmployeeCreateDataAttributes, bool)`
 
 GetAttributesOk returns a tuple with the Attributes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAttributes
 
-`func (o *DistributorUpdateData) SetAttributes(v DistributorUpdateDataAttributes)`
+`func (o *EmployeeCreateData) SetAttributes(v EmployeeCreateDataAttributes)`
 
 SetAttributes sets Attributes field to given value.
 
