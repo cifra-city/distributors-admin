@@ -41,6 +41,14 @@ func Run(ctx context.Context) {
 			})
 		})
 
+		r.Route("/public", func(r chi.Router) {
+			r.Route("/distributors/{distributor_id}", func(r chi.Router) {
+				r.Route("/employees", func(r chi.Router) {
+					r.Get("/", handlers.GetEmployees)
+					r.Get("/{user_id}", handlers.GetEmployeesData)
+				})
+			})
+		})
 	})
 
 	server := httpkit.StartServer(ctx, service.Config.Server.Port, r, service.Logger)

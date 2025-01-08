@@ -12,7 +12,6 @@ import (
 	"github.com/cifra-city/distributors-admin/resources"
 	"github.com/cifra-city/tokens"
 	"github.com/google/uuid"
-	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 )
 
@@ -32,7 +31,7 @@ func EmployeeAdd(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userID, ok := r.Context().Value(tokens.UserIDKey).(uuid.UUID)
+	InitiatorId, ok := r.Context().Value(tokens.UserIDKey).(uuid.UUID)
 	if !ok {
 		log.Warn("UserID not found in context")
 		httpkit.RenderErr(w, problems.Unauthorized("User not authenticated"))
@@ -46,23 +45,14 @@ func EmployeeAdd(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	curEmployee, err := Server.SqlDB.DistributorsEmployees.GetByUser(r.Context(), distributorId, userID)
+	NewUserId, err := uuid.Parse(req.Data.Attributes.UserId)
 	if err != nil {
-		log.Errorf("Failed to get distributor employee: %v", err)
-		httpkit.RenderErr(w, problems.InternalError("Failed to get distributor employee"))
-		return
-	}
-	if curEmployee.Role != sqlcore.RolesModerator && curEmployee.Role != sqlcore.RolesAdmin && curEmployee.Role != sqlcore.RolesOwner {
-		httpkit.RenderErr(w, problems.Forbidden("User is have not permission"))
+		log.Errorf("Failed to parse user id: %v", err)
+		httpkit.RenderErr(w, problems.BadRequest(err)...)
 		return
 	}
 
-	if req.Data.Attributes.Role == string(sqlcore.RolesOwner) {
-		httpkit.RenderErr(w, problems.BadRequest(errors.New("You can't add owner user"))...)
-		return
-	}
-
-	newEmployee, err := Server.SqlDB.DistributorsEmployees.Create(r.Context(), distributorId, userID, req.Data.Attributes.Role)
+	newEmployee, err := Server.SqlDB.DistributorsEmployees.Create(r.Context(), distributorId, InitiatorId, NewUserId, req.Data.Attributes.Role)
 	if err != nil {
 		if err.Error() == "role must be one of: admin, moderator, staff, member" {
 			log.Errorf("Failed to create distributor staff: %v", err)

@@ -3,13 +3,14 @@ required:
   - data
 properties:
   data:
+    type: object
     required:
-    - type
-    - attributes
+      - type
+      - attributes
     properties:
       type:
         type: string
-        enum: [ distributor_employee_collection ]
+        enum: [distributor_employee_collection]
       attributes:
         type: array
         items:

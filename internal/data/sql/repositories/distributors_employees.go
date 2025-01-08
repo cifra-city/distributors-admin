@@ -9,7 +9,7 @@ import (
 )
 
 type DistributorsEmployees interface {
-	Create(ctx context.Context, distributorId uuid.UUID, userId uuid.UUID, role string) (sqlcore.DistributorsEmployee, error)
+	Create(ctx context.Context, distributorId uuid.UUID, InitiatorId uuid.UUID, newUserId uuid.UUID, role string) (sqlcore.DistributorsEmployee, error)
 
 	GetByUser(ctx context.Context, distributorId uuid.UUID, userId uuid.UUID) (sqlcore.DistributorsEmployee, error)
 
@@ -75,7 +75,21 @@ func CompareRoles(role1, role2 sqlcore.Roles) int {
 	return 0
 }
 
-func (d *distributorsEmployees) Create(ctx context.Context, distributorId uuid.UUID, userId uuid.UUID, role string) (sqlcore.DistributorsEmployee, error) {
+func (d *distributorsEmployees) Create(ctx context.Context, distributorId uuid.UUID, InitiatorId uuid.UUID, newUserId uuid.UUID, role string) (sqlcore.DistributorsEmployee, error) {
+	InitiatorUser, err := d.GetByUser(ctx, distributorId, InitiatorId)
+	if err != nil {
+		return sqlcore.DistributorsEmployee{}, err
+	}
+
+	NewUserRole := sqlcore.Roles(role)
+	if !isValidRole(NewUserRole) {
+		return sqlcore.DistributorsEmployee{}, ErrorRole
+	}
+
+	if NewUserRole == sqlcore.RolesOwner || CompareRoles(InitiatorUser.Role, sqlcore.RolesModerator) == -1 || CompareRoles(InitiatorUser.Role, NewUserRole) == -1 {
+		return sqlcore.DistributorsEmployee{}, ErrorNoPermission
+	}
+
 	UserRole := sqlcore.Roles(role)
 	if !isValidRole(UserRole) {
 		return sqlcore.DistributorsEmployee{}, ErrorRole
@@ -83,7 +97,7 @@ func (d *distributorsEmployees) Create(ctx context.Context, distributorId uuid.U
 	return d.queries.CreateDistributorEmployees(ctx, sqlcore.CreateDistributorEmployeesParams{
 		ID:             uuid.New(),
 		DistributorsID: distributorId,
-		UserID:         userId,
+		UserID:         newUserId,
 		Role:           UserRole,
 	})
 }
