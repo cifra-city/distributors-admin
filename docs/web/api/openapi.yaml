@@ -155,20 +155,14 @@ components:
       - type
     EmployeeCreate_data_attributes:
       properties:
-        user_id:
-          description: User ID
+        username:
           type: string
         role:
-          description: User role
-          type: string
-        created_at:
-          description: Creation date
-          format: date-time
+          description: role for user
           type: string
       required:
-      - created_at
       - role
-      - user_id
+      - username
     EmployeeCreate_data:
       properties:
         type:
@@ -189,9 +183,6 @@ components:
       - role
     EmployeeUpdate_data:
       properties:
-        id:
-          description: Resource ID
-          type: string
         type:
           enum:
           - distributor_employee_update
@@ -200,7 +191,6 @@ components:
           $ref: '#/components/schemas/EmployeeUpdate_data_attributes'
       required:
       - attributes
-      - id
       - type
     EmployeeDelete_data_attributes:
       properties:

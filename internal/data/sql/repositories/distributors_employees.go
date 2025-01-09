@@ -10,8 +10,10 @@ import (
 
 type DistributorsEmployees interface {
 	Create(ctx context.Context, distributorId uuid.UUID, InitiatorId uuid.UUID, newUserId uuid.UUID, role string) (sqlcore.DistributorsEmployee, error)
+	CreateOwner(ctx context.Context, distributorId uuid.UUID, userId uuid.UUID) (sqlcore.DistributorsEmployee, error)
 
 	GetByUser(ctx context.Context, distributorId uuid.UUID, userId uuid.UUID) (sqlcore.DistributorsEmployee, error)
+	GetByOwner(ctx context.Context, id uuid.UUID) (sqlcore.DistributorsEmployee, error)
 
 	Update(ctx context.Context, EmployeeId uuid.UUID, role string) (sqlcore.DistributorsEmployee, error)
 	UpdateByUser(ctx context.Context, distributorId uuid.UUID, InitiatorId uuid.UUID, userForUpdateId uuid.UUID, role string) (sqlcore.DistributorsEmployee, error)
@@ -98,7 +100,16 @@ func (d *distributorsEmployees) Create(ctx context.Context, distributorId uuid.U
 		ID:             uuid.New(),
 		DistributorsID: distributorId,
 		UserID:         newUserId,
-		Role:           UserRole,
+		Role:           NewUserRole,
+	})
+}
+
+func (d *distributorsEmployees) CreateOwner(ctx context.Context, distributorId uuid.UUID, UserId uuid.UUID) (sqlcore.DistributorsEmployee, error) {
+	return d.queries.CreateDistributorEmployees(ctx, sqlcore.CreateDistributorEmployeesParams{
+		ID:             uuid.New(),
+		DistributorsID: distributorId,
+		UserID:         UserId,
+		Role:           sqlcore.RolesOwner,
 	})
 }
 
@@ -107,6 +118,10 @@ func (d *distributorsEmployees) GetByUser(ctx context.Context, distributorId uui
 		DistributorsID: distributorId,
 		UserID:         userId,
 	})
+}
+
+func (d *distributorsEmployees) GetByOwner(ctx context.Context, id uuid.UUID) (sqlcore.DistributorsEmployee, error) {
+	return d.queries.GetDistributorByOwner(ctx, id)
 }
 
 func (d *distributorsEmployees) Update(ctx context.Context, EmployeeId uuid.UUID, role string) (sqlcore.DistributorsEmployee, error) {

@@ -7,6 +7,10 @@ VALUES ($1, $2, $3, $4)
 SELECT * FROM distributors_employees
 WHERE id = $1;
 
+-- name: GetDistributorByOwner :one
+SELECT * FROM distributors_employees
+WHERE user_id = $1 AND role = 'owner';
+
 -- name: GetDistributorEmployeesByDistributorIDAndUserID :one
 SELECT * FROM distributors_employees
 WHERE distributors_id = $1 AND user_id = $2;

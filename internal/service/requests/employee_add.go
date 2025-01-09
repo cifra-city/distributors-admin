@@ -9,7 +9,7 @@ import (
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 )
 
-func NewEmployeeAdd(r *http.Request) (req resources.Employee, err error) {
+func NewEmployeeAdd(r *http.Request) (req resources.EmployeeCreate, err error) {
 	if err = json.NewDecoder(r.Body).Decode(&req); err != nil {
 		err = comtools.NewDecodeError("body", err)
 		return

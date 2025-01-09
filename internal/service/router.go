@@ -34,21 +34,22 @@ func Run(ctx context.Context) {
 					})
 					r.Route("/employees", func(r chi.Router) {
 						r.Post("/add", handlers.EmployeeAdd)
-						r.Put("/update", handlers.EmployeeUpdate)
-						r.Delete("/delete", handlers.EmployeeDelete)
+						r.Put("/update/{user_id}", handlers.EmployeeUpdate)
+						r.Delete("/delete/{user_id}", handlers.EmployeeDelete)
+					})
+				})
+			})
+
+			r.Route("/public", func(r chi.Router) {
+				r.Route("/distributors/{distributor_id}", func(r chi.Router) {
+					r.Route("/employees", func(r chi.Router) {
+						r.Get("/", handlers.GetEmployees)
+						r.Get("/{user_id}", handlers.GetEmployeesData)
 					})
 				})
 			})
 		})
 
-		r.Route("/public", func(r chi.Router) {
-			r.Route("/distributors/{distributor_id}", func(r chi.Router) {
-				r.Route("/employees", func(r chi.Router) {
-					r.Get("/", handlers.GetEmployees)
-					r.Get("/{user_id}", handlers.GetEmployeesData)
-				})
-			})
-		})
 	})
 
 	server := httpkit.StartServer(ctx, service.Config.Server.Port, r, service.Logger)

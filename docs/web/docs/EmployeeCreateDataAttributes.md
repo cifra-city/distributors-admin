@@ -4,15 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | **string** | User ID | 
-**Role** | **string** | User role | 
-**CreatedAt** | **time.Time** | Creation date | 
+**Username** | **string** |  | 
+**Role** | **string** | role for user | 
 
 ## Methods
 
 ### NewEmployeeCreateDataAttributes
 
-`func NewEmployeeCreateDataAttributes(userId string, role string, createdAt time.Time, ) *EmployeeCreateDataAttributes`
+`func NewEmployeeCreateDataAttributes(username string, role string, ) *EmployeeCreateDataAttributes`
 
 NewEmployeeCreateDataAttributes instantiates a new EmployeeCreateDataAttributes object
 This constructor will assign default values to properties that have it defined,
@@ -27,24 +26,24 @@ NewEmployeeCreateDataAttributesWithDefaults instantiates a new EmployeeCreateDat
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetUserId
+### GetUsername
 
-`func (o *EmployeeCreateDataAttributes) GetUserId() string`
+`func (o *EmployeeCreateDataAttributes) GetUsername() string`
 
-GetUserId returns the UserId field if non-nil, zero value otherwise.
+GetUsername returns the Username field if non-nil, zero value otherwise.
 
-### GetUserIdOk
+### GetUsernameOk
 
-`func (o *EmployeeCreateDataAttributes) GetUserIdOk() (*string, bool)`
+`func (o *EmployeeCreateDataAttributes) GetUsernameOk() (*string, bool)`
 
-GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
+GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUserId
+### SetUsername
 
-`func (o *EmployeeCreateDataAttributes) SetUserId(v string)`
+`func (o *EmployeeCreateDataAttributes) SetUsername(v string)`
 
-SetUserId sets UserId field to given value.
+SetUsername sets Username field to given value.
 
 
 ### GetRole
@@ -65,26 +64,6 @@ and a boolean to check if the value has been set.
 `func (o *EmployeeCreateDataAttributes) SetRole(v string)`
 
 SetRole sets Role field to given value.
-
-
-### GetCreatedAt
-
-`func (o *EmployeeCreateDataAttributes) GetCreatedAt() time.Time`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *EmployeeCreateDataAttributes) GetCreatedAtOk() (*time.Time, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *EmployeeCreateDataAttributes) SetCreatedAt(v time.Time)`
-
-SetCreatedAt sets CreatedAt field to given value.
 
 
 

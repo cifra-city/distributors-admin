@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"database/sql"
+	"errors"
 	"net/http"
 
 	"github.com/cifra-city/comtools/cifractx"
@@ -38,6 +40,18 @@ func DistributorCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	_, err = Server.SqlDB.DistributorsEmployees.GetByOwner(r.Context(), userID)
+	if err != sql.ErrNoRows {
+		log.Warn("User already has a distributor")
+		httpkit.RenderErr(w, problems.BadRequest(errors.New("one user, one distributor"))...)
+		return
+	}
+	if err != nil && !errors.Is(err, sql.ErrNoRows) {
+		log.Errorf("Failed to get distributor staff: %v", err)
+		httpkit.RenderErr(w, problems.InternalError("Failed to get distributor staff"))
+		return
+	}
+
 	distributor, err := Server.SqlDB.Distributors.Create(r.Context(), userID, req.Data.Attributes.Name)
 	if err != nil {
 		log.Errorf("Failed to create distributor: %v", err)
@@ -45,7 +59,7 @@ func DistributorCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err = Server.SqlDB.DistributorsEmployees.Create(r.Context(), distributor.ID, userID, string(sqlcore.RolesOwner))
+	_, err = Server.SqlDB.DistributorsEmployees.CreateOwner(r.Context(), distributor.ID, userID)
 	if err != nil {
 		log.Errorf("Failed to create distributor staff: %v", err)
 		httpkit.RenderErr(w, problems.InternalError("Failed to create distributor staff"))

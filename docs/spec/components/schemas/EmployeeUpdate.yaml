@@ -4,13 +4,9 @@ required:
 properties:
   data:
     required:
-      - id
       - type
       - attributes
     properties:
-      id:
-        type: string
-        description: "Resource ID"
       type:
         type: string
         enum: [ distributor_employee_update ]

@@ -13,17 +13,11 @@ properties:
       attributes:
         type: object
         required:
-          - user_id
+          - username
           - role
-          - created_at
         properties:
-          user_id:
+          username:
             type: string
-            description: "User ID"
           role:
             type: string
-            description: "User role"
-          created_at:
-            type: string
-            format: date-time
-            description: "Creation date"
+            description: "role for user"

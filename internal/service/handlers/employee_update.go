@@ -42,7 +42,7 @@ func EmployeeUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userForUpdateId, err := uuid.Parse(req.Data.Id)
+	userForUpdateId, err := uuid.Parse(chi.URLParam(r, "user_id"))
 	if err != nil {
 		httpkit.RenderErr(w, problems.BadRequest(err)...)
 		return

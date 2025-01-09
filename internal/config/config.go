@@ -43,6 +43,12 @@ type LoggingConfig struct {
 	Format string `mapstructure:"format"`
 }
 
+type UrlConfig struct {
+	UserStorage struct {
+		GetUser string `mapstructure:"get_user"`
+	} `mapstructure:"user_storage"`
+}
+
 type SwaggerConfig struct {
 	Enabled bool   `mapstructure:"enabled"`
 	URL     string `mapstructure:"url"`
@@ -78,6 +84,7 @@ type Config struct {
 	Swagger  SwaggerConfig    `mapstructure:"swagger"`
 	CORS     CORSConfig       `mapstructure:"cors"`
 	Redis    RedisConfig      `mapstructure:"redis"`
+	Url      UrlConfig        `mapstructure:"url"`
 }
 
 func LoadConfig() (*Config, error) {

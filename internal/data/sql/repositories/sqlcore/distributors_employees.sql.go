@@ -67,6 +67,24 @@ func (q *Queries) DeleteDistributorEmployeesByDistributorIDAndUserId(ctx context
 	return err
 }
 
+const getDistributorByOwner = `-- name: GetDistributorByOwner :one
+SELECT id, distributors_id, user_id, role, created_at FROM distributors_employees
+WHERE user_id = $1 AND role = 'owner'
+`
+
+func (q *Queries) GetDistributorByOwner(ctx context.Context, userID uuid.UUID) (DistributorsEmployee, error) {
+	row := q.db.QueryRowContext(ctx, getDistributorByOwner, userID)
+	var i DistributorsEmployee
+	err := row.Scan(
+		&i.ID,
+		&i.DistributorsID,
+		&i.UserID,
+		&i.Role,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
 const getDistributorEmployeesByDistributorID = `-- name: GetDistributorEmployeesByDistributorID :many
 SELECT id, distributors_id, user_id, role, created_at FROM distributors_employees
 WHERE distributors_id = $1

@@ -12,7 +12,6 @@ package resources
 
 import (
 	"encoding/json"
-	"time"
 	"bytes"
 	"fmt"
 )
@@ -22,12 +21,9 @@ var _ MappedNullable = &EmployeeCreateDataAttributes{}
 
 // EmployeeCreateDataAttributes struct for EmployeeCreateDataAttributes
 type EmployeeCreateDataAttributes struct {
-	// User ID
-	UserId string `json:"user_id"`
-	// User role
+	Username string `json:"username"`
+	// role for user
 	Role string `json:"role"`
-	// Creation date
-	CreatedAt time.Time `json:"created_at"`
 }
 
 type _EmployeeCreateDataAttributes EmployeeCreateDataAttributes
@@ -36,11 +32,10 @@ type _EmployeeCreateDataAttributes EmployeeCreateDataAttributes
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEmployeeCreateDataAttributes(userId string, role string, createdAt time.Time) *EmployeeCreateDataAttributes {
+func NewEmployeeCreateDataAttributes(username string, role string) *EmployeeCreateDataAttributes {
 	this := EmployeeCreateDataAttributes{}
-	this.UserId = userId
+	this.Username = username
 	this.Role = role
-	this.CreatedAt = createdAt
 	return &this
 }
 
@@ -52,28 +47,28 @@ func NewEmployeeCreateDataAttributesWithDefaults() *EmployeeCreateDataAttributes
 	return &this
 }
 
-// GetUserId returns the UserId field value
-func (o *EmployeeCreateDataAttributes) GetUserId() string {
+// GetUsername returns the Username field value
+func (o *EmployeeCreateDataAttributes) GetUsername() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.UserId
+	return o.Username
 }
 
-// GetUserIdOk returns a tuple with the UserId field value
+// GetUsernameOk returns a tuple with the Username field value
 // and a boolean to check if the value has been set.
-func (o *EmployeeCreateDataAttributes) GetUserIdOk() (*string, bool) {
+func (o *EmployeeCreateDataAttributes) GetUsernameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.UserId, true
+	return &o.Username, true
 }
 
-// SetUserId sets field value
-func (o *EmployeeCreateDataAttributes) SetUserId(v string) {
-	o.UserId = v
+// SetUsername sets field value
+func (o *EmployeeCreateDataAttributes) SetUsername(v string) {
+	o.Username = v
 }
 
 // GetRole returns the Role field value
@@ -100,30 +95,6 @@ func (o *EmployeeCreateDataAttributes) SetRole(v string) {
 	o.Role = v
 }
 
-// GetCreatedAt returns the CreatedAt field value
-func (o *EmployeeCreateDataAttributes) GetCreatedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value
-// and a boolean to check if the value has been set.
-func (o *EmployeeCreateDataAttributes) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CreatedAt, true
-}
-
-// SetCreatedAt sets field value
-func (o *EmployeeCreateDataAttributes) SetCreatedAt(v time.Time) {
-	o.CreatedAt = v
-}
-
 func (o EmployeeCreateDataAttributes) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -134,9 +105,8 @@ func (o EmployeeCreateDataAttributes) MarshalJSON() ([]byte, error) {
 
 func (o EmployeeCreateDataAttributes) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["user_id"] = o.UserId
+	toSerialize["username"] = o.Username
 	toSerialize["role"] = o.Role
-	toSerialize["created_at"] = o.CreatedAt
 	return toSerialize, nil
 }
 
@@ -145,9 +115,8 @@ func (o *EmployeeCreateDataAttributes) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"user_id",
+		"username",
 		"role",
-		"created_at",
 	}
 
 	allProperties := make(map[string]interface{})
