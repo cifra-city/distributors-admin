@@ -38,15 +38,23 @@ func GetPlaceEmployee(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var employee models.PlaceEmployee
-	err = Server.MongoDB.PlacesEmployees.Filter().ByPlaceId(placeId).ByUserId(userId).Execute(r.Context(), &employee)
+	employees, err := Server.MongoDB.PlacesEmployees.FilterByPlaceId(placeId).FilterByUserId(userId).Get(r.Context())
 	if err != nil {
 		log.Errorf("Failed to get place employee: %v", err)
 		httpkit.RenderErr(w, problems.InternalError("Failed to get place employee"))
 		return
 	}
+	if len(employees) != 1 {
+		if len(employees) == 0 {
+			httpkit.RenderErr(w, problems.NotFound())
+		} else {
+			log.Errorf("More than one employee found %s %s %s", placeId, userId, employees)
+			httpkit.RenderErr(w, problems.InternalError())
+		}
+		return
+	}
 
-	httpkit.Render(w, NewPlaceEmployeeResponse(employee))
+	httpkit.Render(w, NewPlaceEmployeeResponse(employees[0]))
 }
 
 func NewPlaceEmployeeResponse(employee models.PlaceEmployee) *resources.PlaceEmployee {

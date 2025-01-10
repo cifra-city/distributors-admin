@@ -31,8 +31,7 @@ func GetPlacesEmployees(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var employees []models.PlaceEmployee
-	err = Server.MongoDB.PlacesEmployees.Filter().ByPlaceId(placeId).Execute(r.Context(), &employees)
+	employees, err := Server.MongoDB.PlacesEmployees.FilterByPlaceId(placeId).Get(r.Context())
 	if err != nil {
 		log.Errorf("Failed to get place staff: %v", err)
 		httpkit.RenderErr(w, problems.InternalError("Failed to get place staff"))

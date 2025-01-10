@@ -66,7 +66,7 @@ func PlaceEmployeeAdd(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	employee, err := Server.MongoDB.PlacesEmployees.Add(
+	employee, err := Server.MongoDB.PlacesEmployees.Create(
 		r.Context(),
 		placeId,
 		distributorEmployee.ID,
@@ -75,7 +75,7 @@ func PlaceEmployeeAdd(w http.ResponseWriter, r *http.Request) {
 	)
 	if err != nil {
 		log.Errorf("Failed to add place employee: %v", err)
-		httpkit.RenderErr(w, problems.InternalError())
+		httpkit.RenderErr(w, problems.InternalError("Failed to create employee"))
 		return
 	}
 

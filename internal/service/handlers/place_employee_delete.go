@@ -7,7 +7,6 @@ import (
 	"github.com/cifra-city/comtools/httpkit"
 	"github.com/cifra-city/comtools/httpkit/problems"
 	"github.com/cifra-city/distributors-admin/internal/config"
-	"github.com/cifra-city/distributors-admin/internal/data/nosql/models"
 	"github.com/cifra-city/tokens"
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
@@ -45,15 +44,24 @@ func PlaceEmployeeDelete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var employee models.PlaceEmployee
-	err = Server.MongoDB.PlacesEmployees.Filter().ByPlaceId(placeId).ByUserId(userId).Execute(r.Context(), &employee)
+	employees, err := Server.MongoDB.PlacesEmployees.FilterByPlaceId(placeId).FilterByUserId(userId).Get(r.Context())
 	if err != nil {
 		log.Errorf("Failed to get place employee: %v", err)
 		httpkit.RenderErr(w, problems.InternalError("Failed to get place employee"))
 		return
 	}
 
-	err = Server.MongoDB.PlacesEmployees.Delete(r.Context(), employee.ID)
+	if len(employees) != 1 {
+		if len(employees) == 0 {
+			httpkit.RenderErr(w, problems.NotFound())
+		} else {
+			log.Errorf("More than one employee found %s %s %s", placeId, userId, employees)
+			httpkit.RenderErr(w, problems.InternalError())
+		}
+		return
+	}
+
+	_, err = Server.MongoDB.PlacesEmployees.FilterById(employees[0].ID).Delete(r.Context())
 	if err != nil {
 		log.Errorf("Failed to delete place employee: %v", err)
 		httpkit.RenderErr(w, problems.InternalError("Failed to delete place employee"))

@@ -55,11 +55,11 @@ func Run(ctx context.Context) {
 						r.Route("/employees", func(r chi.Router) {
 							r.Route("/{user_id}", func(r chi.Router) {
 								r.Get("/{user_id}", handlers.GetPlaceEmployee)
-								r.Patch("/{user_id}", handlers.UpdatePlaceEmployee)
-								r.Delete("/{user_id}", handlers.DeletePlaceEmployee)
+								r.Patch("/{user_id}", handlers.PlaceEmployeeUpdate)
+								r.Delete("/{user_id}", handlers.PlaceEmployeeDelete)
 							})
 
-							r.Post("/add", handlers.AddPlaceEmployee)
+							r.Post("/add", handlers.PlaceEmployeeAdd)
 							r.Get("/", handlers.GetPlacesEmployees)
 						})
 					})

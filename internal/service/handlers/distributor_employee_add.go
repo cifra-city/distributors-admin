@@ -85,7 +85,7 @@ func DistributorEmployeeAdd(w http.ResponseWriter, r *http.Request) {
 	httpkit.Render(w, NewDistributorEmployeeResponse(newEmployee))
 }
 
-func NewDistributorEmployeeResponse(employees sqlcore.DistributorsEmployee) *resources.Employee {
+func NewDistributorEmployeeResponse(employees sqlcore.DistributorsEmployee) *resources.DistributorEmployee {
 	return &resources.DistributorEmployee{
 		Data: resources.DistributorEmployeeData{
 			Id:   employees.ID.String(),
