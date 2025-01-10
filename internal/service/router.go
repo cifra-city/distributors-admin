@@ -28,14 +28,30 @@ func Run(ctx context.Context) {
 				r.Use(authMW)
 				r.Post("/create", handlers.DistributorCreate)
 
-				r.Route("/distributors/{distributor_id}", func(r chi.Router) {
-					r.Route("/update", func(r chi.Router) {
-						r.Put("/name", handlers.DistributorUpdate)
+				r.Route("/distributors", func(r chi.Router) {
+					r.Route("/{distributor_id}", func(r chi.Router) {
+						r.Route("/update", func(r chi.Router) {
+							r.Put("/name", handlers.DistributorUpdate)
+						})
+						r.Route("/employees", func(r chi.Router) {
+							r.Route("/{user_id}", func(r chi.Router) {
+								r.Patch("/", handlers.DistributorEmployeeUpdate)
+								r.Delete("/", handlers.DistributorEmployeeDelete)
+							})
+							r.Post("/add", handlers.DistributorEmployeeAdd)
+						})
 					})
-					r.Route("/employees", func(r chi.Router) {
-						r.Post("/add", handlers.DistributorEmployeeAdd)
-						r.Put("/update/{user_id}", handlers.DistributorEmployeeUpdate)
-						r.Delete("/delete/{user_id}", handlers.DistributorEmployeeDelete)
+				})
+
+				r.Route("places", func(r chi.Router) {
+					r.Route("/{place_id}", func(r chi.Router) {
+						r.Route("/employees", func(r chi.Router) {
+							r.Route("/{user_id}", func(r chi.Router) {
+								r.Patch("/", handlers.PlaceEmployeeUpdate)
+								r.Delete("/", handlers.PlaceEmployeeDelete)
+							})
+							r.Post("/add", handlers.PlaceEmployeeAdd)
+						})
 					})
 				})
 			})
@@ -54,17 +70,11 @@ func Run(ctx context.Context) {
 					r.Route("/{place_id}", func(r chi.Router) {
 						r.Route("/employees", func(r chi.Router) {
 							r.Route("/{user_id}", func(r chi.Router) {
-								r.Get("/{user_id}", handlers.GetPlaceEmployee)
-								r.Patch("/{user_id}", handlers.PlaceEmployeeUpdate)
-								r.Delete("/{user_id}", handlers.PlaceEmployeeDelete)
+								r.Get("/", handlers.GetPlaceEmployee)
 							})
-
-							r.Post("/add", handlers.PlaceEmployeeAdd)
 							r.Get("/", handlers.GetPlacesEmployees)
 						})
 					})
-
-					r.Post("/create", nil)
 				})
 			})
 		})

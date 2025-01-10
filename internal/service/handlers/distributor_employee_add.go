@@ -11,9 +11,9 @@ import (
 	"github.com/cifra-city/comtools/httpkit"
 	"github.com/cifra-city/comtools/httpkit/problems"
 	"github.com/cifra-city/distributors-admin/internal/config"
-	"github.com/cifra-city/distributors-admin/internal/data/sql/repositories"
 	"github.com/cifra-city/distributors-admin/internal/data/sql/repositories/sqlcore"
 	"github.com/cifra-city/distributors-admin/internal/service/requests"
+	"github.com/cifra-city/distributors-admin/internal/service/roles"
 	"github.com/cifra-city/distributors-admin/resources"
 	"github.com/cifra-city/tokens"
 	"github.com/go-chi/chi/v5"
@@ -68,11 +68,11 @@ func DistributorEmployeeAdd(w http.ResponseWriter, r *http.Request) {
 
 	newEmployee, err := Server.SqlDB.DistributorsEmployees.Create(r.Context(), distributorId, InitiatorId, NewUserId, req.Data.Attributes.Role)
 	if err != nil {
-		if errors.Is(err, repositories.ErrorRole) {
-			httpkit.RenderErr(w, problems.BadRequest(repositories.ErrorRole)...)
+		if errors.Is(err, roles.ErrorRole) {
+			httpkit.RenderErr(w, problems.BadRequest(roles.ErrorRole)...)
 			return
 		}
-		if errors.Is(err, repositories.ErrorRolePriority) || errors.Is(err, repositories.ErrorNoPermission) {
+		if errors.Is(err, roles.ErrorRolePriority) || errors.Is(err, roles.ErrorNoPermission) {
 			httpkit.RenderErr(w, problems.Forbidden())
 			return
 		}
