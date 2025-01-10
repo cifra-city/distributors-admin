@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/cifra-city/cifra-rabbit"
+	"github.com/cifra-city/distributors-admin/internal/data/nosql"
 	"github.com/cifra-city/distributors-admin/internal/data/sql"
 	"github.com/cifra-city/tokens"
 	"github.com/cloudinary/cloudinary-go/v2"
@@ -15,6 +16,7 @@ const (
 type Service struct {
 	Config       *Config
 	SqlDB        *sql.Repo
+	MongoDB      *nosql.Repo
 	Logger       *logrus.Logger
 	Cloud        *cloudinary.Cloudinary
 	TokenManager *tokens.TokenManager
@@ -36,10 +38,15 @@ func NewServer(cfg *Config) (*Service, error) {
 	if err != nil {
 		return nil, err
 	}
+	MongoDB, err := nosql.NewRepository(cfg.MongoDB.URL, cfg.MongoDB.database)
+	if err != nil {
+		return nil, err
+	}
 
 	return &Service{
 		Config:       cfg,
 		SqlDB:        queries,
+		MongoDB:      MongoDB,
 		Logger:       logger,
 		TokenManager: TokenManager,
 		Cloud:        Cloud,

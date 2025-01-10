@@ -1,0 +1,27 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    required:
+      - type
+      - attributes
+    properties:
+      type:
+        type: string
+        enum: [ place_employee_create ]
+      attributes:
+        type: object
+        required:
+          - username
+          - role
+          - distributor_id
+        properties:
+          username:
+            type: string
+          role:
+            type: string
+            description: "role for user"
+          distributor_id:
+            type: string
+            description: "Distributor ID"

@@ -1,0 +1,17 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    type: object
+    required:
+      - type
+      - attributes
+    properties:
+      type:
+        type: string
+        enum: [place_employee_collection]
+      attributes:
+        type: array
+        items:
+          $ref: './PlaceEmployee.yaml'

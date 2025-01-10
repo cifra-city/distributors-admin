@@ -22,13 +22,21 @@ components:
       $ref: './spec/components/schemas/DistributorUpdate.yaml'
     DistributorCreate:
       $ref: './spec/components/schemas/DistributorCreate.yaml'
-    Employee:
-      $ref: './spec/components/schemas/Employee.yaml'
-    EmployeeCreate:
-      $ref: './spec/components/schemas/EmployeeCreate.yaml'
-    EmployeeUpdate:
-      $ref: './spec/components/schemas/EmployeeUpdate.yaml'
-    EmployeeDelete:
-      $ref: './spec/components/schemas/EmployeeDelete.yaml'
-    EmployeeCollection:
-      $ref: './spec/components/schemas/EmployeeCollection.yaml'
+    DistributorEmployee:
+      $ref: './spec/components/schemas/DistributorEmployee.yaml'
+    DistributorEmployeeCreate:
+      $ref: './spec/components/schemas/DistributorEmployeeCreate.yaml'
+    DistributorEmployeeUpdate:
+      $ref: './spec/components/schemas/DistributorEmployeeUpdate.yaml'
+    DistributorEmployeeDelete:
+      $ref: './spec/components/schemas/DistributorEmployeeDelete.yaml'
+    DistributorEmployeeCollection:
+      $ref: './spec/components/schemas/DistributorEmployeeCollection.yaml'
+    PlaceEmployee:
+      $ref: './spec/components/schemas/PlaceEmployee.yaml'
+    PlaceEmployeeCollection:
+      $ref: './spec/components/schemas/PlaceEmployeeCollection.yaml'
+    PlaceEmployeeCreate:
+      $ref: './spec/components/schemas/PlaceEmployeeCreate.yaml'
+    PlaceEmployeeUpdate:
+      $ref: './spec/components/schemas/PlaceEmployeeUpdate.yaml'

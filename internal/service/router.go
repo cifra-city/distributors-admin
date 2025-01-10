@@ -33,19 +33,38 @@ func Run(ctx context.Context) {
 						r.Put("/name", handlers.DistributorUpdate)
 					})
 					r.Route("/employees", func(r chi.Router) {
-						r.Post("/add", handlers.EmployeeAdd)
-						r.Put("/update/{user_id}", handlers.EmployeeUpdate)
-						r.Delete("/delete/{user_id}", handlers.EmployeeDelete)
+						r.Post("/add", handlers.DistributorEmployeeAdd)
+						r.Put("/update/{user_id}", handlers.DistributorEmployeeUpdate)
+						r.Delete("/delete/{user_id}", handlers.DistributorEmployeeDelete)
 					})
 				})
 			})
 
 			r.Route("/public", func(r chi.Router) {
-				r.Route("/distributors/{distributor_id}", func(r chi.Router) {
-					r.Route("/employees", func(r chi.Router) {
-						r.Get("/", handlers.GetEmployees)
-						r.Get("/{user_id}", handlers.GetEmployeesData)
+				r.Route("/distributors", func(r chi.Router) {
+					r.Route("/{distributor_id}", func(r chi.Router) {
+						r.Route("/employees", func(r chi.Router) {
+							r.Get("/", handlers.GetDistributorEmployees)
+							r.Get("/{user_id}", handlers.GetDistributorEmployeesData)
+						})
 					})
+				})
+
+				r.Route("places", func(r chi.Router) {
+					r.Route("/{place_id}", func(r chi.Router) {
+						r.Route("/employees", func(r chi.Router) {
+							r.Route("/{user_id}", func(r chi.Router) {
+								r.Get("/{user_id}", handlers.GetPlaceEmployee)
+								r.Patch("/{user_id}", handlers.UpdatePlaceEmployee)
+								r.Delete("/{user_id}", handlers.DeletePlaceEmployee)
+							})
+
+							r.Post("/add", handlers.AddPlaceEmployee)
+							r.Get("/", handlers.GetPlacesEmployees)
+						})
+					})
+
+					r.Post("/create", nil)
 				})
 			})
 		})

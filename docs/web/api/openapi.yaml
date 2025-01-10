@@ -33,34 +33,58 @@ components:
           $ref: '#/components/schemas/DistributorCreate_data'
       required:
       - data
-    Employee:
+    DistributorEmployee:
       properties:
         data:
-          $ref: '#/components/schemas/Employee_data'
+          $ref: '#/components/schemas/DistributorEmployee_data'
       required:
       - data
-    EmployeeCreate:
+    DistributorEmployeeCreate:
       properties:
         data:
-          $ref: '#/components/schemas/EmployeeCreate_data'
+          $ref: '#/components/schemas/DistributorEmployeeCreate_data'
       required:
       - data
-    EmployeeUpdate:
+    DistributorEmployeeUpdate:
       properties:
         data:
-          $ref: '#/components/schemas/EmployeeUpdate_data'
+          $ref: '#/components/schemas/DistributorEmployeeUpdate_data'
       required:
       - data
-    EmployeeDelete:
+    DistributorEmployeeDelete:
       properties:
         data:
-          $ref: '#/components/schemas/EmployeeDelete_data'
+          $ref: '#/components/schemas/DistributorEmployeeDelete_data'
       required:
       - data
-    EmployeeCollection:
+    DistributorEmployeeCollection:
       properties:
         data:
-          $ref: '#/components/schemas/EmployeeCollection_data'
+          $ref: '#/components/schemas/DistributorEmployeeCollection_data'
+      required:
+      - data
+    PlaceEmployee:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlaceEmployee_data'
+      required:
+      - data
+    PlaceEmployeeCollection:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlaceEmployeeCollection_data'
+      required:
+      - data
+    PlaceEmployeeCreate:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlaceEmployeeCreate_data'
+      required:
+      - data
+    PlaceEmployeeUpdate:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlaceEmployeeUpdate_data'
       required:
       - data
     Distributor_data_attributes:
@@ -118,7 +142,7 @@ components:
       required:
       - attributes
       - type
-    Employee_data_attributes:
+    DistributorEmployee_data_attributes:
       properties:
         user_id:
           description: User ID
@@ -138,7 +162,7 @@ components:
       - distributor_id
       - role
       - user_id
-    Employee_data:
+    DistributorEmployee_data:
       properties:
         id:
           description: employee ID
@@ -148,12 +172,12 @@ components:
           - distributor_employee
           type: string
         attributes:
-          $ref: '#/components/schemas/Employee_data_attributes'
+          $ref: '#/components/schemas/DistributorEmployee_data_attributes'
       required:
       - attributes
       - id
       - type
-    EmployeeCreate_data_attributes:
+    DistributorEmployeeCreate_data_attributes:
       properties:
         username:
           type: string
@@ -163,60 +187,60 @@ components:
       required:
       - role
       - username
-    EmployeeCreate_data:
+    DistributorEmployeeCreate_data:
       properties:
         type:
           enum:
           - distributor_employee_create
           type: string
         attributes:
-          $ref: '#/components/schemas/EmployeeCreate_data_attributes'
+          $ref: '#/components/schemas/DistributorEmployeeCreate_data_attributes'
       required:
       - attributes
       - type
-    EmployeeUpdate_data_attributes:
+    DistributorEmployeeUpdate_data_attributes:
       properties:
         role:
           description: User role
           type: string
       required:
       - role
-    EmployeeUpdate_data:
+    DistributorEmployeeUpdate_data:
       properties:
         type:
           enum:
           - distributor_employee_update
           type: string
         attributes:
-          $ref: '#/components/schemas/EmployeeUpdate_data_attributes'
+          $ref: '#/components/schemas/DistributorEmployeeUpdate_data_attributes'
       required:
       - attributes
       - type
-    EmployeeDelete_data_attributes:
+    DistributorEmployeeDelete_data_attributes:
       properties:
         user_id:
           description: User ID
           type: string
       required:
       - user_id
-    EmployeeDelete_data:
+    DistributorEmployeeDelete_data:
       properties:
         type:
           enum:
           - distributor_employee_delete
           type: string
         attributes:
-          $ref: '#/components/schemas/EmployeeDelete_data_attributes'
+          $ref: '#/components/schemas/DistributorEmployeeDelete_data_attributes'
       required:
       - attributes
       - type
-    EmployeeCollection_data_attributes_inner:
+    DistributorEmployeeCollection_data_attributes_inner:
       properties:
         data:
-          $ref: '#/components/schemas/Employee_data'
+          $ref: '#/components/schemas/DistributorEmployee_data'
       required:
       - data
-    EmployeeCollection_data:
+    DistributorEmployeeCollection_data:
       properties:
         type:
           enum:
@@ -224,8 +248,122 @@ components:
           type: string
         attributes:
           items:
-            $ref: '#/components/schemas/EmployeeCollection_data_attributes_inner'
+            $ref: '#/components/schemas/DistributorEmployeeCollection_data_attributes_inner'
           type: array
+      required:
+      - attributes
+      - type
+    PlaceEmployee_data_attributes:
+      properties:
+        user_id:
+          description: User ID
+          type: string
+        place_id:
+          description: Place ID
+          type: string
+        employee_id:
+          description: Employee ID
+          type: string
+        username:
+          description: Username
+          type: string
+        role:
+          description: User role
+          type: string
+        created_at:
+          description: Creation date
+          format: date-time
+          type: string
+        updated_at:
+          description: Update date
+          format: date-time
+          type: string
+      required:
+      - created_at
+      - employee_id
+      - place_id
+      - role
+      - updated_at
+      - user_id
+      - username
+    PlaceEmployee_data:
+      properties:
+        id:
+          description: employee ID
+          type: string
+        type:
+          enum:
+          - place_employee
+          type: string
+        attributes:
+          $ref: '#/components/schemas/PlaceEmployee_data_attributes'
+      required:
+      - attributes
+      - id
+      - type
+    PlaceEmployeeCollection_data_attributes_inner:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlaceEmployee_data'
+      required:
+      - data
+    PlaceEmployeeCollection_data:
+      properties:
+        type:
+          enum:
+          - place_employee_collection
+          type: string
+        attributes:
+          items:
+            $ref: '#/components/schemas/PlaceEmployeeCollection_data_attributes_inner'
+          type: array
+      required:
+      - attributes
+      - type
+    PlaceEmployeeCreate_data_attributes:
+      properties:
+        username:
+          type: string
+        role:
+          description: role for user
+          type: string
+        distributor_id:
+          description: Distributor ID
+          type: string
+      required:
+      - distributor_id
+      - role
+      - username
+    PlaceEmployeeCreate_data:
+      properties:
+        type:
+          enum:
+          - place_employee_create
+          type: string
+        attributes:
+          $ref: '#/components/schemas/PlaceEmployeeCreate_data_attributes'
+      required:
+      - attributes
+      - type
+    PlaceEmployeeUpdate_data_attributes:
+      properties:
+        role:
+          description: User role
+          type: string
+        distributor_id:
+          description: Distributor ID
+          type: string
+      required:
+      - distributor_id
+      - role
+    PlaceEmployeeUpdate_data:
+      properties:
+        type:
+          enum:
+          - place_employee_update
+          type: string
+        attributes:
+          $ref: '#/components/schemas/PlaceEmployeeUpdate_data_attributes'
       required:
       - attributes
       - type

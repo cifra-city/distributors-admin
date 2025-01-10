@@ -1,0 +1,50 @@
+type: object
+required:
+  - data
+properties:
+  data:
+    required:
+      - id
+      - type
+      - attributes
+    properties:
+      id:
+        type: string
+        description: "employee ID"
+      type:
+        type: string
+        enum: [ place_employee ]
+      attributes:
+        type: object
+        required:
+          - user_id
+          - place_id
+          - employee_id
+          - username
+          - role
+          - created_at
+          - updated_at
+        properties:
+          user_id:
+            type: string
+            description: "User ID"
+          place_id:
+            type: string
+            description: "Place ID"
+          employee_id:
+            type: string
+            description: "Employee ID"
+          username:
+            type: string
+            description: "Username"
+          role:
+            type: string
+            description: "User role"
+          created_at:
+            type: string
+            format: date-time
+            description: "Creation date"
+          updated_at:
+            type: string
+            format: date-time
+            description: "Update date"
