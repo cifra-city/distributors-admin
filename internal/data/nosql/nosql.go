@@ -3,7 +3,7 @@ package nosql
 import (
 	"fmt"
 
-	"github.com/cifra-city/distributors-admin/internal/data/nosql/repositories"
+	"github.com/recovery-flow/distributors-admin/internal/data/nosql/repositories"
 )
 
 type Repo struct {

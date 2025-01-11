@@ -4,14 +4,13 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/cifra-city/comtools"
-	"github.com/cifra-city/distributors-admin/resources"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
+	"github.com/recovery-flow/distributors-admin/resources"
 )
 
 func NewPlaceEmployeeUpdate(r *http.Request) (req resources.PlaceEmployeeUpdate, err error) {
 	if err = json.NewDecoder(r.Body).Decode(&req); err != nil {
-		err = comtools.NewDecodeError("body", err)
+		err = newDecodeError("body", err)
 		return
 	}
 

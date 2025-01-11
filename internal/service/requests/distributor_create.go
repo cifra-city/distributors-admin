@@ -2,16 +2,22 @@ package requests
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
-	"github.com/cifra-city/comtools"
-	"github.com/cifra-city/distributors-admin/resources"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
+	"github.com/recovery-flow/distributors-admin/resources"
 )
+
+func newDecodeError(what string, err error) error {
+	return validation.Errors{
+		what: fmt.Errorf("decode request %s: %w", what, err),
+	}
+}
 
 func NewDistributorCreate(r *http.Request) (req resources.DistributorCreate, err error) {
 	if err = json.NewDecoder(r.Body).Decode(&req); err != nil {
-		err = comtools.NewDecodeError("body", err)
+		err = newDecodeError("body", err)
 		return
 	}
 

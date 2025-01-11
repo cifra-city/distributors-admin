@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/cifra-city/distributors-admin/internal/data/nosql/models"
 	"github.com/google/uuid"
+	"github.com/recovery-flow/distributors-admin/internal/data/nosql/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

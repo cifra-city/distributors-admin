@@ -3,11 +3,11 @@ package service
 import (
 	"context"
 
-	"github.com/cifra-city/comtools/cifractx"
-	"github.com/cifra-city/comtools/httpkit"
-	"github.com/cifra-city/distributors-admin/internal/config"
-	"github.com/cifra-city/distributors-admin/internal/service/handlers"
 	"github.com/go-chi/chi/v5"
+	"github.com/recovery-flow/comtools/cifractx"
+	"github.com/recovery-flow/comtools/httpkit"
+	"github.com/recovery-flow/distributors-admin/internal/config"
+	"github.com/recovery-flow/distributors-admin/internal/service/handlers"
 	"github.com/sirupsen/logrus"
 )
 
@@ -20,7 +20,7 @@ func Run(ctx context.Context) {
 	}
 
 	r.Use(cifractx.MiddlewareWithContext(config.SERVER, service))
-	authMW := service.TokenManager.AuthMiddleware(service.Config.JWT.AccessToken.SecretKey)
+	authMW := service.TokenManager.AuthMdl(service.Config.JWT.AccessToken.SecretKey)
 
 	r.Route("/distributors-storage", func(r chi.Router) {
 		r.Route("/v1", func(r chi.Router) {

@@ -1,18 +1,19 @@
-module github.com/cifra-city/distributors-admin
+module github.com/recovery-flow/distributors-admin
 
 go 1.23.1
 
 require (
 	github.com/alecthomas/kingpin v2.2.6+incompatible
-	github.com/cifra-city/cifra-rabbit v0.0.1
 	github.com/cifra-city/comtools v0.0.31
-	github.com/cifra-city/tokens v0.0.21
 	github.com/cloudinary/cloudinary-go/v2 v2.9.0
 	github.com/go-chi/chi/v5 v5.2.0
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0
 	github.com/google/uuid v1.6.0
 	github.com/lib/pq v1.10.9
 	github.com/pkg/errors v0.9.1
+	github.com/recovery-flow/cifra-rabbit v0.0.21
+	github.com/recovery-flow/comtools v0.0.41
+	github.com/recovery-flow/tokens v0.1.2
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/viper v1.19.0
 	go.mongodb.org/mongo-driver v1.17.2

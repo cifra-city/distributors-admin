@@ -3,9 +3,9 @@ package repositories
 import (
 	"context"
 
-	"github.com/cifra-city/distributors-admin/internal/data/sql/repositories/sqlcore"
-	"github.com/cifra-city/distributors-admin/internal/service/roles"
 	"github.com/google/uuid"
+	"github.com/recovery-flow/distributors-admin/internal/data/sql/repositories/sqlcore"
+	"github.com/recovery-flow/distributors-admin/internal/service/roles"
 )
 
 type DistributorsEmployees interface {

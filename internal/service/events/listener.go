@@ -3,8 +3,8 @@ package events
 import (
 	"context"
 
-	"github.com/cifra-city/comtools/cifractx"
-	"github.com/cifra-city/distributors-admin/internal/config"
+	"github.com/recovery-flow/comtools/cifractx"
+	"github.com/recovery-flow/distributors-admin/internal/config"
 	"github.com/sirupsen/logrus"
 )
 

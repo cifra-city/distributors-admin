@@ -1,7 +1,7 @@
 package roles
 
 import (
-	"github.com/cifra-city/distributors-admin/internal/data/sql/repositories/sqlcore"
+	"github.com/recovery-flow/distributors-admin/internal/data/sql/repositories/sqlcore"
 )
 
 func IsValidRole(role sqlcore.Roles) bool {
